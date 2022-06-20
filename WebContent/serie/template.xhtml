@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:insert name="metadata"/>
+    <h:head>
+        <f:facet name="first"> 
+            <meta http-equiv="Content-Type"
+                  content="text/html; charset=iso-8859-1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+            <title>Fora de Série</title>
+            <h:outputStylesheet library="css" name="default.css" />
+        </f:facet>
+    </h:head>
+    <h:body>
+       <div class="cabecalho">
+       	<table class="cabecalho">
+       		<tr>
+       			<td class="logo"><h:graphicImage library="imagens" name="peNaEstrada7.jpg" alt="foraDeSerie" style="heigth: 250px; width: 100%"/></td>
+       		</tr>
+       	</table>
+       	<div class="menu">
+       		<ui:remove></ui:remove>
+       		<ui:include src="menu.xhtml" />
+       	</div>
+       </div>
+       
+       <div class="fundo">
+       	<div class="conteudo" style="heigth: 100%">
+       		<ui:insert name="conteudo"/>
+       	</div>
+       </div>
+       
+       <div class="rodape">
+       	<table>
+       		<tr>
+       			<td class="empresa">
+       				<h:outputText value="Fora de Série - Sofia Trindade" />
+       			</td>
+       		</tr>
+       	</table>
+       </div>
+       
+    </h:body>
+
+</html>
+
+

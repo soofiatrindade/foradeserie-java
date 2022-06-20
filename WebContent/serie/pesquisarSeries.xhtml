@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formPesquisarSeries">
+			<p:panel style="height:100%">
+				<p:panel style="height:100%">
+					<h:graphicImage library="imagens" name="locais.png"
+						style="vertical-align: middle; width: 63px;" alt="locaisIcon" />
+					<p:outputLabel value="Pesquisar Séries"
+						style="font-size: 250%; vertical-align: middle;"></p:outputLabel>
+					<br />
+
+					<p:separator />
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="idPesquisaSeries" value="Pesquisar Séries:"></p:outputLabel>
+						<p:outputLabel for="serieId" value="Série:"></p:outputLabel>
+
+						<p:inputText id="idPesquisaSeries" size="50"
+							value="#{serieController.paramPesquisa}" />
+
+						<p:selectOneMenu id="serieId" converter="generoConverter"
+							value="#{serieController.generoOneMenu}">
+							<f:selectItem itemLabel="Selecione o gênero" itemValue=""
+								noSelectionOption="true" />
+
+							<f:selectItems value="#{serieController.listaGeneros}" var="item"
+								itemLabel="#{item.nome}" itemValue="#{item}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+
+					<br />
+					<p:commandButton id="pesquisarSeries"
+						style="width: 200px; float:right;"
+						action="#{serieController.pesquisarSeries}"
+						update="formPesquisarSeries" value="Pesquisar" icon="fa fa-search" />
+
+					<p:commandButton id="botaoAdicionarSerie"
+						style="width: 200px; float:right;"
+						action="#{serieController.novaSerie}"
+						oncomplete="PF('dlgDetalhesSerie').show();"
+						update=":formDetalhesSerie" value="Adicionar Série"
+						icon="fa fa-plus-square-o" />
+					<p:spacer height="30px"></p:spacer>
+
+					<p:messages id="messages" showDetail="false" />
+
+				</p:panel>
+				<p:spacer height="30px"></p:spacer>
+				<p:dataTable id="idSerieDataTable" var="serie"
+					value="#{serieController.listaSeries}" paginator="true"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Não foi encontrado nenhuma série.">
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{serie.nome}">
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Gênero">
+						<h:outputText value="#{serie.genero.nome}">
+						</h:outputText>
+
+					</p:column>
+
+					<p:column headerText="Status">
+						<h:outputText value="#{serie.status}">
+						</h:outputText>
+
+					</p:column>
+
+					<p:column headerText="Data Lançamento">
+						<h:outputText value="#{serie.dataLancamento}" />
+					</p:column>
+
+					<p:column headerText="Alterar" style="width:10%">
+						<p:commandButton id="botaoAlterar" update=":formDetalhesSerie"
+							onclick="PF('dlgDetalhesSerie').show();" style="width:80px"
+							icon="fa fa-search">
+							<f:setPropertyActionListener value="#{serie}"
+								target="#{serieController.serieSelecionado}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+		<p:dialog header="Série" resizable="false"
+			widgetVar="dlgDetalhesSerie" modal="true" height="400" width="800">
+			<ui:include src="/serie/dlgDetalhesSerie.xhtml">
+			</ui:include>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

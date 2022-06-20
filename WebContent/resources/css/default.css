@@ -1,0 +1,66 @@
+/**
+ * Ajustes do template
+ */
+body {
+	font-family: Trebuchet MS;
+	font-size: 11pt;
+	background: #e9e9e9;
+}
+.conteudo {
+    margin: 0 auto;
+	border: 1px solid #dfe0e1;
+	background: #fafafa;
+	margin-top: 2px;
+	padding: 10px;
+	width: 980px;
+}
+
+div.cabecalho {
+        background: #FFFFFF;
+}
+
+table.cabecalho {
+	width: 1000px;
+	margin: 0 auto;
+	color: #000000;
+}
+div.cabecalho .logo {
+	width: 700px;
+	vertical-align: middle;
+}
+
+.fundo {
+	background: repeat-x #e9e9e9;
+	padding-top: 6px;
+}
+
+.rodape {
+	margin: 2px auto;
+	width: 1002px;
+	padding: 0.5em 6px;
+	background: #eee;
+	color: gray;
+	border: 1px solid #dadada;
+	font-size: small;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.menu {
+	margin-right: 5px;
+}
+
+div.cabecalho .menu {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+div.cabecalho .dados {
+	text-align: right;
+}
+
+div.cabecalho .dados li {
+	display: inline;
+}
+
+

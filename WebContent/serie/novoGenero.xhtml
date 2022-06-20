@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" template="template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formGenero">
+			<p:panel style="height:100%">
+				<h:graphicImage library="imagens" name="moeda.png"
+					style="vertical-align: middle; width: 63px;" alt="locaisIcon" />
+				<p:outputLabel value="Novo Gênero"
+					style="font-size: 250%; vertical-align: middle;"></p:outputLabel>
+				<br />
+
+				<p:separator />
+
+				<p:messages id="messages" showDetail="false" />
+
+				<p:dataTable var="genero" value="#{generoController.listaGenero}"
+					paginator="true" rowsPerPageTemplate="5,10,15">
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{genero.nome}" />
+
+					</p:column>
+
+					<p:column headerText="Alterar">
+						<p:commandButton id="botaoAlterar" update=":formAlterarGenero"
+							onclick="PF('dlgAlterarGenero').show();" icon="fa fa-search">
+							<f:setPropertyActionListener value="#{genero}"
+								target="#{generoController.generoSelecionado}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="Excluir">
+						<p:commandButton id="botaoExcluir"
+							action="#{generoController.removerGenero}"
+							update="formGenero" icon="fa fa-trash-o">
+
+							<p:confirm header="Confirmação"
+								message="Tem certeza que deseja remover?" icon="ui-icon-alert" />
+
+							<f:setPropertyActionListener value="#{genero}"
+								target="#{generoController.generoSelecionado}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<br />
+
+				<p:commandButton id="botaoAdicionarGenero" style="width: 100%;"
+					onclick="PF('dlgAdicionarGenero').show();"
+					update=":formAdicionarGenero" value="Adicionar Gênero"
+					icon="fa fa-money" />
+
+			</p:panel>
+		</h:form>
+
+
+		<p:dialog header="Adicionar Gênero" resizable="false"
+			widgetVar="dlgAdicionarGenero" modal="true" height="200"
+			width="520">
+
+			<h:graphicImage library="imagens" name="addLocal.png"
+				style="vertical-align: middle; width: 63px; " alt="usuarioIcon" />
+			<p:outputLabel value="Gênero"
+				style="font-size: 250%; vertical-align: middle;"></p:outputLabel>
+			<br />
+			<p:separator />
+
+			<h:form id="formAdicionarGenero">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="nomeGenero" value="Nome: " />
+					<p:inputText id="nomeGenero"
+						value="#{generoController.novoGenero.nome}"
+						style="width:350px" symbolPosition="p" required="true"
+						validatorMessage="Por favor, insira o nome.">
+					</p:inputText>
+				</h:panelGrid>
+				<p:commandButton id="button" style="width: 350px;"
+					action="#{generoController.adicionarGenero}"
+					value="Salvar genero" update=":formGenero"
+					oncomplete="PF('dlgAdicionarGenero').hide();" icon="fa fa-money" />
+			</h:form>
+
+		</p:dialog>
+
+
+
+		<p:dialog header="Alterar genero" resizable="false"
+			widgetVar="dlgAlterarGenero" modal="true" height="200" width="520">
+
+			<h:graphicImage library="imagens" name="moeda.png"
+				style="vertical-align: middle; width: 63px; " alt="usuarioIcon" />
+			<p:outputLabel value="Gênero"
+				style="font-size: 250%; vertical-align: middle;"></p:outputLabel>
+			<br />
+			<p:separator />
+
+			<h:form id="formAlterarGenero">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="alterarGenero" value="Nome:" />
+					<p:inputText id="alterarGenero"
+						value="#{generoController.generoSelecionado.nome}"
+						style="width:350px" symbolPosition="p" required="true"
+						validatorMessage="Por favor, insira o nome.">
+					</p:inputText>
+					
+				</h:panelGrid>
+				<p:commandButton id="botaoAlterarGenero" style="width: 350px;"
+					action="#{generoController.alterarGenero}" value="Salvar"
+					update=":formGenero"
+					oncomplete="PF('dlgAlterarGenero').hide();" icon="fa fa-money" />
+			</h:form>
+
+		</p:dialog>
+
+		<p:confirmDialog global="true">
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		</p:confirmDialog>
+
+	</ui:define>
+</ui:composition>

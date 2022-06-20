@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core">
+				
+	<h:form id="formDetalhesSerie">
+
+		<h:graphicImage library="imagens" name="addLocal.png" style="vertical-align: middle; width: 63px; " alt="usuarioIcon" />
+		<p:outputLabel value="Detalhes Série" style="font-size: 250%; vertical-align: middle;"></p:outputLabel>
+		<br />
+		<p:separator />
+		
+		<p:messages id="messagesDetalhes"  showDetail="false" />
+			
+		<h:panelGrid columns="3" cellpadding="5" width="100%" >
+			<p:outputLabel for="nomeSerie" value="Nome:" />
+			<p:outputLabel for="genero" value="Gênero:" />
+			<p:outputLabel for="relevancia" value="Relevância (1 a 10):" />
+
+			<p:inputText id="nomeSerie" value="#{serieController.serieSelecionado.nome}" style="width: 300px"/>
+			<p:selectOneMenu id="genero"
+							 converter="generoConverter"
+							 required="true"
+							 
+							 value="#{serieController.serieSelecionado.genero}">
+							 <f:selectItem itemLabel="Selecione o gênero" itemValue="" />
+							 <f:selectItems value="#{serieController.listaGeneros}" var="item" itemLabel="#{item.nome}"
+							  itemValue="#{item}" />
+			</p:selectOneMenu>
+			<p:inputText id="relevancia" value="#{serieController.serieSelecionado.relevancia}" style="width: 100px" />
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2" cellpadding="4" width="100%" >
+			<p:outputLabel for="status" value="Status (Iniciada, Assistida, Pausada, Lista):" />
+			<p:outputLabel for="dataLancamento" value="Lançamento:" />
+
+			<p:inputText id="status" value="#{serieController.serieSelecionado.status}" />
+			<p:calendar id="dataLancamento" pattern="dd/MM/yyyy"
+						value="#{serieController.serieSelecionado.dataLancamento}"
+						showOn="button" />
+			
+		</h:panelGrid>
+		
+		<p:separator />
+			
+		<br/>
+		
+		<p:commandButton id="button" style="width: 100%;"
+						 action="#{serieController.salvarSerie}" value="Salvar série"
+						 update="formDetalhesSerie"
+						 icon="fa fa-save" />
+	</h:form>
+
+</ui:composition>

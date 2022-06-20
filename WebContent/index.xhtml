@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:insert name="metadata"/>
+    <h:head>
+        <f:facet name="first"> 
+            <meta http-equiv="Content-Type"
+                  content="text/html; charset=iso-8859-1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+            <title>Pé na estrada</title>
+            <h:outputStylesheet library="css" name="default.css" />
+        </f:facet>
+    </h:head>
+    <h:body>
+        <h:form id="login-form">
+            <div class="fundo">
+                <div class="conteudo" style="height:630px;">
+                    <div style="position: relative; left: 35%;top: 5%;width: 350px">
+                        <h:graphicImage library="imagens" style="width: 400px;" name="travel.png" alt="set" />
+                        <br/>
+                        <br/>
+                        <h:outputText value="Login"/>
+                        <br/>
+                        <p:inputText id="login" style="width: 343px;" value="#{usuarioController.login}"/>
+                        <br/>
+                        <h:outputText value="Senha"/>
+                        <br/>
+                        <p:password id="senha"  style="width: 343px;" value="#{usuarioController.senha}"/>
+                        <br/>
+                        <p:messages id="messages" showDetail="false" style="width: 350px;" autoUpdate="true" closable="true" />
+                        <br/>
+                        <p:commandButton id="button" action="#{usuarioController.entrar}" 
+                        style="width: 350px;" update="messages" value="Entrar" icon="fa fa-sign-in" />
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p:button outcome="/novoCadastro.xhtml" value="Cadastrar..." icon="fa fa-plus-square" style="width: 350px;"/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+
+</html>
+
+

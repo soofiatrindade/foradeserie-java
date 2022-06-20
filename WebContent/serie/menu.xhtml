@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+      <h:form id="formMenu">
+	      <p:menubar>
+	      <p:submenu label="  Home" incon="ui-icon-home">
+		      		<p:menuitem outcome="/serie/index.xhtml">Home</p:menuitem>
+		     </p:submenu>
+	      	<p:submenu label="  Séries" incon="fa fa-money">
+		      		<p:menuitem outcome="/serie/pesquisarSeries.xhtml">Séries</p:menuitem>
+		     </p:submenu>
+		     
+		     <p:submenu label="  Gêneros" incon="fa fa-money">
+		      		<p:menuitem outcome="/serie/novoGenero.xhtml">Gêneros</p:menuitem>
+		     </p:submenu>
+		     
+	      	<p:submenu label="  Perfil" incon="fa fa-user">
+	      		<p:menuitem outcome="/serie/dadosUsuario.xhtml">Perfil</p:menuitem>
+	      	</p:submenu>
+	      	<p:submenu label=" Sair" icon="fa fa-user">
+              	<p:menuitem action="#{usuarioController.sair}" >Sair</p:menuitem>
+             </p:submenu>
+	      	
+	      </p:menubar>
+      </h:form>
+</ui:composition>

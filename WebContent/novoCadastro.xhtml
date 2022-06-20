@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:insert name="metadata" />
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="Content-Type"
+			content="text/html; charset=iso-8859-1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<title>Fora de Série</title>
+		<h:outputStylesheet library="css" name="default.css" />
+	</f:facet>
+</h:head> 
+<h:body>
+		<h:form id="formCadastrarUsuario">
+		<div class="fundo">
+			<div class="conteudo" style="height: 100%;">
+			<p:panel id="novoCadastroPanel" style="height:100%"> 
+	 			<h:graphicImage library="imagens" name="usuario.png" style="vertical-align: middle; width: 63px;" alt="usuarioIcon" />
+	 			<p:outputLabel value="Novo usuário" style="font-size: 250%; vertical-align: middle;"></p:outputLabel><br/>
+	 			
+	 			<p:separator></p:separator>
+	 			
+	 			<p:messages id="messages"  showDetail="false" />
+	 			
+	    		<h:panelGrid columns="2" cellpadding="5">	 
+					<p:outputLabel for="nome" value="Nome:" />
+					<p:inputText  id="nome"
+					              requiredMessage="Por favor, informe um nome." 
+					              value="#{usuarioController.novoUsuario.nome}"
+								  required="true"></p:inputText>
+					
+					<p:outputLabel for="usuario" value="Usuario" />
+					<p:inputText id="usuario"
+								 requiredMessage="Por favor, informe um nome de usuario." 
+								 value="#{usuarioController.novoUsuario.usuario}" 
+								 required="true">
+					                <p:ajax event="blur" listener="#{usuarioController.validarUsuario}" update="messages" />					                
+					            </p:inputText>	
+					
+					<p:outputLabel for="sexo" value="Sexo" />
+					<p:selectOneRadio id="sexo" value="#{usuarioController.novoUsuario.sexo}">
+			            <f:selectItem itemLabel="Masculino" itemValue="M" />
+			            <f:selectItem itemLabel="Feminino" itemValue="F" />
+			        </p:selectOneRadio>
+						
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password  id="senha"
+								 match="senhaConfirmacao"
+								 requiredMessage="Por favor, informe uma senha." 
+								 validatorMessage="A senhas devem ser iguais."
+								 feedback="true"
+								 inline="true"
+                    			 promptLabel="Digite uma senha:" 
+                    			 weakLabel="Fraca"
+                    			 goodLabel="Média" 
+                    			 strongLabel="Forte"
+					  			 value="#{usuarioController.novoUsuario.senha}" 
+					  			 required="true">
+					</p:password>	
+					
+					<p:outputLabel for="senhaConfirmacao" value="Confirme a senha:" />
+					<p:password id="senhaConfirmacao"
+								requiredMessage="Por favor, informe novamente a senha."
+								value="#{usuarioController.novoUsuario.senha}" 
+								required="true"></p:password>
+									
+					<p:outputLabel for="dataNascimento" value="Data Nascimento:" />
+	        		<p:calendar id="dataNascimento"
+	        					pattern="dd/MM/yyyy" 
+	        					value="#{usuarioController.novoUsuario.dataNascimento}" 
+	        					showOn="button" />
+					
+					<p:commandButton id="button" 
+							        action="#{usuarioController.cadastrarNovoUsuario}" 
+									update="formCadastrarUsuario"
+									value="Cadastrar" 
+									icon="fa fa-user-plus" />
+	        	</h:panelGrid>
+	        	
+        	</p:panel>
+			</div>
+		</div>
+		<p:spotlight target="novoCadastroPanel" widgetVar="spot"/>
+	</h:form>
+</h:body>
+
+</html>
+
+
